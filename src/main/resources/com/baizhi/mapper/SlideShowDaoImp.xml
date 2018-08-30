@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.SlideShowDao">
+    <insert id="insert">
+        insert into slideshow values(#{id},#{title},#{imgPath},#{content},#{upTime},#{status})
+    </insert>
+    <delete id="delete">
+        delete from slideshow where id=#{id}
+    </delete>
+    <update id="update">
+        update slideshow set id=#{id},title=#{title},imgPath=#{imgPath},content=#{content},upTime=#{upTime},status=#{status}
+    </update>
+    <select id="queryAll" resultType="SlideShow">
+        select id,title,imgPath,content,upTime,status
+        from slideshow
+    </select>
+    <select id="queryBypage" resultType="SlideShow">
+        select id,title,imgPath,content,upTime,status
+        from slideshow
+        limit #{beginIndex},#{rows}
+    </select>
+</mapper>

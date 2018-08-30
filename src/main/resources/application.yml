@@ -1,0 +1,27 @@
+server:
+  context-path: /cmfz
+  port: 8797
+  jsp-servlet:
+    init-parameters:
+      development: true
+spring:
+  datasource:
+    name: cmfzwuycxm
+    url: jdbc:mysql://127.0.0.1:3306/cmfzwuycxm
+    username: root
+    password: root
+    driver: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+  aop:
+    proxy-target-class: true
+mybatis:
+  mapper-locations: classpath:com/baizhi/mapper/*Imp.xml
+  type-aliases-package: com.baizhi.entity
