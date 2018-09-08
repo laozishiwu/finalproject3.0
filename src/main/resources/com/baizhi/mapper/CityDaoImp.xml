@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.CityDao">
+    <!-- 添加 -->
+    <insert id="insertCity">
+		insert into cities(id,name,url,leaf,parentId) values(#{id},#{name},#{url},#{leaf},#{parentId})
+	</insert>
+    <!-- 删除 -->
+    <delete id="deleteCity">
+		delete from cities where id=#{id}
+	</delete>
+    <!-- 修改 -->
+    <update id="updateCity">
+		update cities set name=#{name},url=#{url},leaf=#{leaf},parentId=#{parentId}
+		where id=#{id}
+	</update>
+    <!-- 查询一个   id-->
+    <select id="queryCity" resultType="city">
+		select id,name,url,leaf,parentId from cities
+		where id=#{id}
+	</select>
+    <!-- 查询一个   name-->
+    <select id="queryCityByname" resultType="city">
+		select id,name,url,leaf,parentId from cities
+		where name like concat('%',#{name},'%')
+	</select>
+    <!-- 查询所有 -->
+    <select id="queryAll" resultType="city">
+		select id,name,url,leaf,parentId from cities
+	</select>
+    <!-- 模糊查询name -->
+    <select id="queryLikename" resultType="city">
+		select id,name,url,leaf,parentId from cities
+		where name like concat('%',#{name},'%')
+	</select>
+    <!-- 批量删除 -->
+    <delete id="deleteBachAcc">
+        delete from cities
+        where id in
+        <foreach collection="ids" open="(" item="id" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!-- 模糊查询工资区间
+    <select id="querySalaries" resultType="city">
+        select id,name,salary,age from city
+        where salary&lt;#{downSalary} and salary&gt;#{upSalary}
+    </select>-->
+    <!-- 分页展示 -->
+    <select id="queryBypage" resultType="city">
+		select id,name,url,leaf,parentId from cities
+		limit #{beginIndex},#{pageSize}
+	</select>
+</mapper>

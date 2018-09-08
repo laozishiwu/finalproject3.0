@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.SpecialDao">
+    <resultMap id="specialMap" type="Special">
+        <id column="sid" property="id"/>
+        <result column="stitle" property="title"/>
+        <result column="scount" property="count"/>
+        <result column="scoverImg" property="coverImg"/>
+        <result column="sscore" property="score"/>
+        <result column="sauthor" property="author"/>
+        <result column="sbroadCast" property="broadCast"/>
+        <result column="sbrief" property="brief"/>
+        <result column="screattime" property="creattime"/>
+        <result column="spublishtime" property="publishtime"/>
+        <result column="sstatus" property="status"/>
+        <collection property="children" ofType="Chapter">
+            <id column="cid" property="id"/>
+            <result column="ctitle" property="title"/>
+            <result column="cduration" property="duration"/>
+            <result column="csize" property="size"/>
+            <result column="caudioPath" property="audioPath"/>
+        </collection>
+    </resultMap>
+    <sql id="sql">
+        s.id sid,s.title stitle,s.count scount,s.coverImg scoverImg,s.score sscore,s.author sauthor,s.broadCast sbroadCast,s.brief sbrief,s.creattime screattime,s.publishtime spublishtime,s.status sstatus,
+        c.id cid,c.title ctitle,c.duration cduration,c.size csize,c.audioPath caudioPath
+        from special s left join chapter c on s.id=c.sid
+    </sql>
+    <insert id="insert">
+       insert into special(id,title,count,coverImg,score,author,broadCast,brief,creattime,publishtime,status)
+       values(#{id},#{title},#{count},#{coverImg},#{score},#{author},#{broadCast},#{brief},#{creattime},#{publishtime},#{status})
+    </insert>
+    <delete id="delete">
+        delete from special where id=#{id}
+    </delete>
+    <update id="update">
+        update special set id=#{id},title=#{title},count=#{count},coverImg=#{coverImg},
+       score=#{score},author=#{author},broadCast=#{broadCast},brief=#{brief},creattime=#{creattime},
+       publishtime=#{publishtime},status=#{status}
+    </update>
+    <select id="query" resultMap="specialMap">
+        select
+        <include refid="sql"/>
+        where id=#{id}
+    </select>
+    <select id="queryAll" resultMap="specialMap">
+        select
+        <include refid="sql"/>
+    </select>
+    <select id="queryBypage" resultMap="specialMap">
+        select
+        <include refid="sql"/>
+        limit #{beginIndex},#{rows}
+    </select>
+</mapper>

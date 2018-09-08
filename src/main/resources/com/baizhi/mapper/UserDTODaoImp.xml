@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.UserDTODao">
+    <select id="queryByweek" resultType="UserDTO">
+        select count(id) count from user
+        where to_days(sysdate())-to_days(registtime)&lt;7*#{week}
+    </select>
+    <select id="queryByLocation" resultType="UserDTO">
+        select count(id) value,location name from user
+        where sex=#{sex}
+        group by location
+    </select>
+
+</mapper>

@@ -8,4 +8,33 @@
     <select id="queryAll" resultType="Manager">
         select id,username,password from manager
     </select>
+    <insert id="insert">
+        insert into manager values (#{id},#{username},#{password})
+    </insert>
+    <delete id="delete">
+        delete from manager where id=#{id}
+    </delete>
+    <update id="update">
+        update manager set username=#{username},password=#{password}
+        where id=#{id}
+    </update>
+    <select id="queryBypage" resultType="Manager">
+        select id,username,password from manager
+        limit #{beginIndex},#{rows}
+    </select>
+    <select id="queryByname" resultType="Manager">
+        select id,username,password from manager
+        where username like  concat ('%',#{username},'%')
+    </select>
+    <select id="queryByid" resultType="Manager">
+        select id,username,password from manager
+        where id=#{id}
+    </select>
+    <delete id="deletes">
+        delete from manager
+        where id in
+        <foreach collection="ids" open="(" item="id" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

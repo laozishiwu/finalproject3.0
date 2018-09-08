@@ -1,5 +1,8 @@
 package com.baizhi.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,6 +11,8 @@ public class SlideShow implements Serializable {
     private String title;
     private String imgPath;
     private String content;
+    @JSONField(format = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date upTime;
     private String status;
 

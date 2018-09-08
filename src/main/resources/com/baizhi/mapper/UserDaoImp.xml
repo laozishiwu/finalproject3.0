@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.UserDao">
+    <sql id="sql">
+        id,name,dhamaname,img,sex,location,sign,phone,password,salt,status,registtime
+    </sql>
+    <select id="queryByid" resultType="User">
+        select
+        <include refid="sql"/>
+        from user
+        where id=#{id}
+    </select>
+    <select id="queryAll" resultType="User">
+        select
+        <include refid="sql"/>
+        from user
+    </select>
+    <select id="queryLikename" resultType="User">
+        select
+        <include refid="sql"/>
+        from user
+        where dhamaname like concat('%',#{dhamaname},'%')
+    </select>
+    <select id="queryBypage" resultType="User">
+        select
+        <include refid="sql"/>
+        from user
+        limit #{beginIndex},#{rows}
+    </select>
+    <update id="update">
+        update user set id=#{id},name=#{name},dhamaname=#{dhamaname},img=#{img},sex=#{sex},location=#{location},
+        sign=#{sign},phone=#{phone},password=#{password},salt=#{salt},status=#{status},registtime=#{registtime}
+        where id=#{id}
+    </update>
+    <delete id="delete">
+        delete from user where id=#{id}
+    </delete>
+    <select id="queryCountstime" resultType="Integer">
+        select count(*) from user where datediff(NOW(),registtime)
+    </select>
+</mapper>

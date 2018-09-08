@@ -1,6 +1,8 @@
 package com.baizhi.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baizhi.annotation.ChinaName;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -28,7 +30,24 @@ public class User {
    @ChinaName(name="状态")
     private String status;
    @ChinaName(name="注册时间")
+   @JSONField(format = "yyyy-MM-dd")
+   @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date registtime;
+
+   /* public User(String id,String name, String dhamaname, String img, String sex, String location, String sign, String phone, String password, String salt, String status, Date registtime) {
+        this.id = id;
+        this.name = name;
+        this.dhamaname = dhamaname;
+        this.img = img;
+        this.sex = sex;
+        this.location = location;
+        this.sign = sign;
+        this.phone = phone;
+        this.password = password;
+        this.salt = salt;
+        this.status = status;
+        this.registtime = registtime;
+    }*/
 
     @Override
     public String toString() {

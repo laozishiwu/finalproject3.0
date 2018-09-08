@@ -16,12 +16,18 @@ spring:
     encoding:
       charset: UTF-8
       force: true
+    multipart:
+      max-file-size: 300MB
+      max-request-size: 300MB
   mvc:
     view:
       prefix: /
       suffix: .jsp
   aop:
     proxy-target-class: true
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
 mybatis:
   mapper-locations: classpath:com/baizhi/mapper/*Imp.xml
   type-aliases-package: com.baizhi.entity

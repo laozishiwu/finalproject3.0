@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.MasterDao">
+    <sql id="sql">
+        id,name,dharmaname,status,phone,photo
+    </sql>
+    <insert id="insert">
+        insert into master values(#{id},#{name},#{dharmaname},#{status},#{phone},#{photo})
+    </insert>
+    <delete id="delete">
+        delete from master where id=#{id}
+    </delete>
+    <select id="queryAll" resultType="Master">
+        select
+        <include refid="sql"/>
+        from master
+    </select>
+    <select id="queryBypage" resultType="Master">
+        select
+        <include refid="sql"/>
+        from master
+        limit #{beginIndex},#{rows}
+    </select>
+    <select id="queryByname" resultType="Master">
+        select
+        <include refid="sql"/>
+        from master
+        where name like concat ('%',#{name},'%')
+    </select>
+    <delete id="deletes">
+        delete from master where id in
+        <foreach collection="ids" open="(" item="id" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
